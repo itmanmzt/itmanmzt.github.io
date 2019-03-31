@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 相关博客
+date:   2019-03-31 00:00:00 +0800
 permalink: /reference/
 ---
 
@@ -8,24 +9,14 @@ permalink: /reference/
 {:toc}
 
 
-走向架构师之路
+技术人的博客
 =====================
-[走向架构师之路](http://blog.csdn.net/cutesource/article/details/4901506)
+[Tony Chen的专栏](https://blog.csdn.net/chjttony/article/list/1)
+[ITPeng Cheng的专栏](https://blog.csdn.net/pengchengmm)
+[skywang12345](http://www.cnblogs.com/skywang12345/category/455711.html)
+[王浩的技术博客](https://blog.csdn.net/peterwanghao/article/category/1101326)
+[数据学习](https://www.datalearner.com/blog_list)
+[zifangsky的个人博客](https://www.zifangsky.cn/)
+[莫那·鲁道](https://blog.csdn.net/qq_38182963)
 
-HTTP协议详解
-=====================
-[HTTP协议详解](http://www.jmarshall.com/easy/http/)
 
-Axis 2.0的入门
-=====================
-[曹胜欢][http://blog.csdn.net/csh624366188/article/details/8362696](http://blog.csdn.net/csh624366188/article/details/8362696)
-
-[一线码农]
-=====================
-算法入门和分布式缓存入门
-[http://www.cnblogs.com/huangxincheng/archive/2011/11/14/2249046.html](http://www.cnblogs.com/huangxincheng/archive/2011/11/14/2249046.html)
-
-[雷霄骅]
-=====================
-视音频编解码技术学习方法
-[http://blog.csdn.net/leixiaohua1020/article/details/18893769](http://blog.csdn.net/leixiaohua1020/article/details/18893769)
