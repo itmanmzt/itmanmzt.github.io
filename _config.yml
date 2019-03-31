@@ -1,14 +1,14 @@
 # Site settings
-name: TO be or not to be
+name: TO BE OR NOT TO BE
 email: 312058125@qq.com
 author: Marin
 url: ""
 resume_site: ""
 github: https://github.com/itmanmzt/
 baseurl: ""
-description: Try your best!
+description: Try Your Best!
 meta_description: Marin的个人博客，一个自学编程的大三学生，在即将毕业的迷茫期，给自己一个证明自己的机会。
-motto: no regrets.
+motto: No Regrets.
 banner: 让未来的你感谢现在拼命的自己。
 
 #permalink: /:categories/:year/:month/:day/:title/
