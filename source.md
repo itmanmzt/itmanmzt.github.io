@@ -6,7 +6,8 @@ permalink: /source/
 
 ---
 
-[TOC]
+* content
+{:toc}
 
 资源分享
 =====================

@@ -6,7 +6,8 @@ permalink: /freedom/
 
 ---
 
-[TOC]
+* content
+{:toc}
 
 自由分享
 =====================

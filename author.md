@@ -10,9 +10,9 @@ permalink: /author/
 
 个人简介
 =====================
-Name:  Marin
-Universiry:  GDUT University
-Born:  GUANGDONG SHANTOU
-Live:  GUANGDONG GUANGZHOU
-Age:  20
-Technology age: 2 years
++ Name:  Marin<br>
++ Universiry:  GDUT University<br>
++ Born:  GUANGDONG SHANTOU<br>
++ Live:  GUANGDONG GUANGZHOU<br>
++ Age:  20<br>
++ Technology age: 2 years<br>
