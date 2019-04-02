@@ -153,7 +153,7 @@ Results logged to /var/lib/gems/2.3.0/extensions/x86_64-linux/2.3.0/ffi-1.9.18/g
 
 <br>
 
-+ 第一步:去JekyllThemes下载一个自己喜欢的模板 。
++ 第一步:去[JekyllThemes](http://jekyllthemes.org/){:target="_blank"}下载一个自己喜欢的模板 。
 + 第二步:按照之前的步骤把下载好的模板上传到自己的Github仓库中 。
 + 第三步:在_posts文件夹中放入自己写好的博客,文件名必须是日期-标题名,例如:2016-10-25-我的第一篇博客 。
 + 第四步:上传博客到Github中即可访问自己的博客。
