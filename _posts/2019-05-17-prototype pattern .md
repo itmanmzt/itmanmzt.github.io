@@ -12,6 +12,9 @@ categories: 设计模式
 * content
 {:toc}
 
+---
+---
+
 ## 原型模式
 原型模式在java中的应用的核心就是利用java中cloneable接口的clone方法，实现对原型对象的拷贝来创建新的对象。
 ### 条件
