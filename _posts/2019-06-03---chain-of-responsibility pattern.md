@@ -195,7 +195,7 @@ public class Test {
 }
 ```
 运行结果：
-![](https://itmanmzt.github.io/styles/images/zerenliani/001.jpg){:align="center"}<br><br>
+![](https://itmanmzt.github.io/styles/images/zerenlian/001.jpg){:align="center"}<br><br>
 <br>
 
 <br>
