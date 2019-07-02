@@ -497,3 +497,9 @@ public class FanBianYiTest {
 ## 常见问题
 1、使用注意点：锁对象不能为空，作用域不宜过大，避免死锁。
 2、如何选择Lock和synchronized：出于程序安全性和避免出错的原则，如果可以的话不建议使用Lock和synchronized，可以直接使用java.util.concurrent和Java.util.concurrent.atomic里面已经封装好的线程安全的类。如果要使用这些同步工具，那么非必须使用Lock特性的情况下就使用synchronized。
+
+  <br>
+
+<br>
+
+<center>有Marin的地方就有你的收获</center>
