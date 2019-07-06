@@ -16,7 +16,7 @@ tag: 小功能
 ---
 
 # message authentication code
-首先要选择一个短信服务平台，本文介绍的是阿里云，具体操作步骤如下：
+首先要选择一个短信服务平台，本文介绍的是阿里云，具体操作步骤如下：<br>
 1、注册阿里云账号并登陆；<br>
 2、开通短信服务；<br>
 3、配置短信签名；<br>
@@ -29,26 +29,26 @@ tag: 小功能
 ![](https://itmanmzt.github.io/styles/images/duanxin/001.jpg){:align="center"}
 然后按要求开通服务......
 ## 配置短信签名和短信模板
-![](https://itmanmzt.github.io/styles/images/redis/002.jpg){:align="center"}
+![](https://itmanmzt.github.io/styles/images/duanxin/002.jpg){:align="center"}
 根据自己的业务范围选择国内或国际业务进行配置
-![](https://itmanmzt.github.io/styles/images/redis/003.jpg){:align="center"}
-![](https://itmanmzt.github.io/styles/images/redis/004.jpg){:align="center"}
+![](https://itmanmzt.github.io/styles/images/duanxin/003.jpg){:align="center"}
+![](https://itmanmzt.github.io/styles/images/duanxin/004.jpg){:align="center"}
 配置并提交申请之后就等待审核通过.....
 ## 开通和配置PAM服务
 [点击这里开通](https://buy.aliyun.com/ram){:target="_blank"}<br>
 开通完成后按下面图示进行配置：<br>
 首先按要求创建用户：
-![](https://itmanmzt.github.io/styles/images/redis/005.jpg){:align="center"}
+![](https://itmanmzt.github.io/styles/images/duanxin/005.jpg){:align="center"}
 创建用户后系统会给你一个AccessKey ID 和一个AccessKeySecret，一定要记下来否则页面关闭就看不了了，切记！<br>
 接下来进行权限设置：
-![](https://itmanmzt.github.io/styles/images/redis/006.jpg){:align="center"}
+![](https://itmanmzt.github.io/styles/images/duanxin/006.jpg){:align="center"}
 从左边找出下面的四个权限添加到右边：
-![](https://itmanmzt.github.io/styles/images/redis/007.jpg){:align="center"}
+![](https://itmanmzt.github.io/styles/images/duanxin/007.jpg){:align="center"}
 到了这里配置工作就已经完成，下面就需要进行开发工作
 ## 开发的前期准备
 [点击这里观看开发文档并下载SDK](https://help.aliyun.com/document_detail/55359.html?spm=a2c4g.11186623.2.18.65be3144ePmp16){:target="_blank"}<br>
 本文使用Java语言进行开发，所以需要在项目中加入下面两个jar包：
-![](https://itmanmzt.github.io/styles/images/redis/008.jpg){:align="center"}
+![](https://itmanmzt.github.io/styles/images/duanxin/008.jpg){:align="center"}
 ## 后台开发代码
 ```
 import com.aliyuncs.DefaultAcsClient;
@@ -196,8 +196,8 @@ public class SmsDemo {
 }
 ```
 运行效果展示：
-![](https://itmanmzt.github.io/styles/images/redis/009.jpg){:align="center"}
-![](https://itmanmzt.github.io/styles/images/redis/010.jpg){:align="center"}<br><br>
+![](https://itmanmzt.github.io/styles/images/redis/duanxin.jpg){:align="center"}
+![](https://itmanmzt.github.io/styles/images/redis/duanxin.jpg){:align="center"}<br><br>
 
 
 
