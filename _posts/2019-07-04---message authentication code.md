@@ -196,8 +196,8 @@ public class SmsDemo {
 }
 ```
 运行效果展示：
-![](https://itmanmzt.github.io/styles/images/redis/duanxin.jpg){:align="center"}
-![](https://itmanmzt.github.io/styles/images/redis/duanxin.jpg){:align="center"}<br><br>
+![](https://itmanmzt.github.io/styles/images/duanxin/009.jpg){:align="center"}
+![](https://itmanmzt.github.io/styles/images/duanxin/010.jpg){:align="center"}<br><br>
 
 
 
