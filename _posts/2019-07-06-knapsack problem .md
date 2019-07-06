@@ -476,3 +476,9 @@ public class KnapTest2 {
 | 贪心算法 | O(n*logn) |速度快 | 不一定是最优解 |启发式方法 |
 |回溯法 | O(n*2n) | 最优解 | 速度慢 | 剪枝 |
 
+  <br>
+
+<br>
+
+<center>有Marin的地方就有你的收获</center>
+

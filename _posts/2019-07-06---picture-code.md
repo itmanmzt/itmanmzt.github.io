@@ -644,9 +644,14 @@ public class LoginController{
     }
 }
 ```
-![](imageURL)
-
-<img src="https://itmanmzt.github.io/styles/images/picture-code/001.git" />
+结果演示：<br>
+![](https://itmanmzt.github.io/styles/images/picture-code/001.gif){:align="center"}<br><br>
 
 控制台打印信息：<br>
 ![](https://itmanmzt.github.io/styles/images/picture-code/001.jpg){:align="center"}<br><br>
+
+  <br>
+
+<br>
+
+<center>有Marin的地方就有你的收获</center>
