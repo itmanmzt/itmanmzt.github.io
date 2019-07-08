@@ -23,8 +23,8 @@ categories: 数据库
 
 ## 通用的redis命令
 命令演示：<br>
-![](https://itmanmzt.github.io/styles/images/redis/011.jpg){:align="center"}
-![](https://itmanmzt.github.io/styles/images/redis/012.jpg){:align="center"}<br><br>
+![](https://itmanmzt.github.io/styles/images/redis/013.jpg){:align="center"}
+![](https://itmanmzt.github.io/styles/images/redis/014.jpg){:align="center"}<br><br>
 命令介绍：<br>
 1、keys *命令可以获取数据库的所有键值对的key值；<br>
 2、keys my?命令可以获取以my开头并且还含有另外一个字符的键值对的key，一个？代表一个任意字符；<br>
@@ -82,7 +82,7 @@ RDB保存的备份文件为dump.rdb；其保存路径和其他配置如下：<br
 
 优势：适合大规模的数据恢复和对数据完整性和一致性要求不高；<br>
 劣势：在一定间隔时间做一次备份，所以如果redis意外down掉的话，就会丢失最后一次快照后的所有修改；Fork的时候，内存中的数据被克隆了一份，大致两倍的膨胀性需要考虑内存空间；<br>
- 
+
 ### AOF
 以日志的形式来记录每个写操作，将redis执行过的所有写指令记录下来（读操作不记录），只许追加文件但不可以改写文件，redis启动之初会读取该文件的重新构建数据；<br>
 AOF通过redis.conf的APPEND ONLY MODE设置来开启：<br>
