@@ -23,7 +23,7 @@ categories: 设计模式
 　　单例模式确保某个类只有一个实例，而且自行实例化并向整个系统提供这个实例。
 
 ## 饿汉单例模式
-饿汉模式是在类中直接进行静态的初始化，类一加载便创建类的实例化对象。这种模式是线程安全的。
+饿汉模式是在类中直接进行静态的初始化，类一加载便创建类的实例化对象。这种模式是线程安全的，并且没有延迟加载。
 ```
 public class Ehan(){
 	private Ehan(){}
@@ -233,6 +233,110 @@ public class Test1 {
 ```
 运行结果：
 ![](https://itmanmzt.github.io/styles/images/danli/001.jpg){:align="center"}<br><br>
+
+## 枚举类实现单例
+枚举和静态代码块的特性相似，在使用枚举类时，构造方法会被自动调用，可以利用这一特性实现单例；使用枚举实现单例的优点包括：功能完整、使用简洁、无偿地自动提供了序列化机制、在面对复杂的序列化或者反射攻击时仍然可以绝对防止多次实例化(对于反射攻击enum类会抛出异常，反射在通过newInstance创建对象时，会检查该类是否ENUM修饰，如果是则抛出异常，反射失败；对于序列化enum能自动解决）<br>
+实体类：<br>
+```
+public class DataEnum {
+}
+```
+枚举类：<br>
+```
+public enum EnumTest {
+    DATASOURCE;
+    private DataEnum de;
+
+    private EnumTest() {
+        de=new DataEnum();
+    }
+    public DataEnum getInstance(){
+        return de;
+    }
+}
+```
+测试类：<br>
+```
+public class DanliTest {
+    public static void main(String[] args) {
+        DataEnum de1=EnumTest.DATASOURCE.getInstance();
+        DataEnum de2=EnumTest.DATASOURCE.getInstance();
+        System.out.println(de1==de2);
+    }
+}
+```
+运行结果：<br>
+![](https://itmanmzt.github.io/styles/images/danli/004.jpg){:align="center"}<br><br>
+
+## 单例模式的序列化与反序列化实现
+我们知道java对象的序列化操作是实现serializable接口，我们就可以把它往内存中写再从内存里读出从而“组装”成一个与原来一模一样的对象，但是当我们遇到单例序列化的时候，反序列化会创建新的对象，这就打破了单例的规则；<br>
+通过更深入的了解我们知道serializable and Externalizable classes,方法readResolve允许class在反序列化返回对象前替换、解析在流中读出来的对象；<br>
+实现readResolve方法，一个class可以直接控制反序列化返回的类型和对象引用，方法readResolve会在ObjectInputStream已经读取一个对象并在准备返回前调用，ObjectOutputStream会检查对象的class是否定义了readResolve方法，如果定义了，将由readResolve方法指定返回的对象，返回对象的类型一定要是兼容的，否则会抛出ClassCastException;<br>
+实现类:<br>
+```
+public class MyObject implements Serializable {
+    // 内部类方式
+    private static class MyObjectHandler {
+        private static final MyObject myObject = new MyObject();
+    }
+
+    private MyObject() {
+    }
+
+    public static MyObject getInstance() {
+        return MyObjectHandler.myObject;
+    }
+
+
+    protected Object readResolve() throws ObjectStreamException {
+        System.out.println("调用了readResolve方法！");
+        return MyObjectHandler.myObject;
+    }
+
+}
+
+```
+测试类：<br>
+```
+public class SerTest {
+    public static void main(String[] args) {
+        try {
+            MyObject myObject = MyObject.getInstance();
+            FileOutputStream fosRef = new FileOutputStream(new File(
+                    "D:/myObjectFile.txt"));
+            ObjectOutputStream oosRef = new ObjectOutputStream(fosRef);
+            oosRef.writeObject(myObject);
+            oosRef.close();
+            fosRef.close();
+            System.out.println(myObject.hashCode());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            FileInputStream fisRef = new FileInputStream(new File(
+                    "D:/myObjectFile.txt"));
+            ObjectInputStream iosRef = new ObjectInputStream(fisRef);
+            MyObject myObject = (MyObject) iosRef.readObject();
+            iosRef.close();
+            fisRef.close();
+            System.out.println(myObject.hashCode());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+}
+```
+运行结果：<br>
+![](https://itmanmzt.github.io/styles/images/danli/005.jpg){:align="center"}<br><br>
 
 ## 模拟打印机工作原理
 原理：当有打印工作进来，就把单例对象锁上，等打印工作结束之后再释放掉锁让其他线程获取单例对象进行打印，我们后面将对比多例模式。<br>
