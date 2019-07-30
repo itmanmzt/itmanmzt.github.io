@@ -21,14 +21,11 @@ categories: 设计模式
 
 ## 结构
 
-Command类：是一个抽象类，类中对需要执行的命令进行声明，一般来说要对外公布一个execute方法用来执行命令。
-ConcreteCommand类：Command类的实现类，对抽象类中声明的方法进行实现。
-Client类：最终的客户端调用类。
-        
-以上三个类的作用应该是比较好理解的，下面我们重点说一下Invoker类和Recevier类。
-
-Invoker类：调用者，负责调用命令。
-Receiver类：接收者，负责接收命令并且执行命令。
+Command类：是一个抽象类，类中对需要执行的命令进行声明，一般来说要对外公布一个execute方法用来执行命令。<br>
+ConcreteCommand类：Command类的实现类，对抽象类中声明的方法进行实现。<br>
+Client类：最终的客户端调用类。<br>
+Invoker类：调用者，负责调用命令。<br>
+Receiver类：接收者，负责接收命令并且执行命令。<br>
 
 ## 优缺点
 

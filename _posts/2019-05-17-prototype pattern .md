@@ -197,7 +197,7 @@ public class test {
 可以看出，浅拷贝后，原型对象中的引用类型值改变，拷贝的对象引用类型的值也跟着变化，实际上浅拷贝的对象内部引用类型对象和原型对象内部的引用类型对象指向同一引用。clone这种对象的时候需要注意，如果希望拷贝的对象不受原型对象的影响，浅拷贝就不适用了。
 
 深拷贝实例代码：<br>
-原型类：
+1、使用clone方法：<br>
 ```
 public class YuanXing implements Cloneable {
 	private String name;
@@ -243,6 +243,75 @@ public class YuanXing implements Cloneable {
 		// TODO Auto-generated method stub
 		return yuanXing;
 	}
+	public void show(){
+		System.out.println("原型实现类！"+":"+name+":"+id+":"+list);
+		
+	}
+}
+```
+2、通过序列化方法(推荐使用，不需要一个个进行处理）：<br>
+```
+public class YuanXing implements Serializable {
+	private String name;
+	private Integer id;
+	private ArrayList list=new ArrayList();
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public ArrayList getList() {
+		return list;
+	}
+
+	public void setList(ArrayList list) {
+		this.list = list;
+	}
+
+	public Object deepClone(){
+        //创建流对象
+        ByteArrayOutputStream bos=null;
+        ObjectOutputStream oos=null;
+        ByteArrayInputStream bis=null;
+        ObjectInputStream ois=null;
+        
+        try{
+            bos=new ByteArrayOutputStream();
+            oos=new ObjectOutputStream(bos);
+            oos.writeObject(this);//把当前对象以流的形式输出；
+            
+            bis=new ByteArrayInputStream();
+            ois=new ObjectInputStream(bis);
+            YuanXing copyObj=(YuanXing)ois.readObject();
+            
+            return copyObj;
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }finally{
+            try{
+                bos.close();
+                oos.close();
+                bis.close();
+                ois.close();
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+        }
+	}
+	
 	public void show(){
 		System.out.println("原型实现类！"+":"+name+":"+id+":"+list);
 		

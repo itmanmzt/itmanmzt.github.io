@@ -24,15 +24,37 @@ categories: 设计模式
 
 ## 饿汉单例模式
 饿汉模式是在类中直接进行静态的初始化，类一加载便创建类的实例化对象。这种模式是线程安全的，并且没有延迟加载。
+1、静态变量：<br>
 ```
 public class Ehan(){
+	//私有化构造器方法
 	private Ehan(){}
+	//设置静态变量
     private static final Ehan ehan=new Ehan();
+    //提供对外获取唯一实例的方法
     public static Ehan getInstance(){
         return ehan;
     }
 }
 ```
+优点：这种写法比较简单，在类装载的时候就完成实例化，避免了线程同步问题；<br>
+缺点：在类装载的时候就完成实例化，没有达到懒加载的效果。如果从始至终从未使用过这个实例，就会造成内存浪费；<br>
+这种方式是基于classloader机制避免了多线程的同步问题，不过，instance在类装载时就实例化；<br>
+2、静态代码块：<br>
+```
+public class Ehan2(){
+    private Ehan2(){}
+    private static Ehan2 ehan2;
+    static{
+        ehan2=new Ehan2();
+    }
+     public static Ehan2 getInstance(){
+        return ehan2;
+    }
+    
+}
+```
+
 
 ## 懒汉单例模式
 
@@ -66,7 +88,7 @@ public class LanHan(){
     }
 }
 ```
-
+这种方式效率低，synchronized的范围太大；<br>
 2、双重检查锁定。通过双重的if判断保障只有一个线程进行初始化操作，避免了每次都进行同步，大大提升了性能，但双重if在一定程度上也会影响性能。
 
 ```
@@ -85,7 +107,7 @@ public class LanHan(){
     }
 }
 ```
-
+双重判断避免了创建多个实例，也实现了懒加载；<br>
 3、通过定义静态内部类并在类中进行静态初始化，利用classloader的机制只有一个线程能进入到初始化的程序，实现了线程安全，是三种方法里面性能最高的方法。
 
 ```
@@ -98,7 +120,8 @@ public class LanHan(){
     }
 }
 ```
-
+静态内部类方式在类被加载时并不会立即实例化，而是在需要实例化时，调用getInstance方法，才会装载静态内部类，从而实例类的实例化；<br>
+类的静态属性只会在第一次加载类的时候初始化，所以在这里，JVM帮助我们保证了线程的安全性，在类进行初始化时，别的线程是无法进入的；<br>
 ## 实例测试
 
 ```
