@@ -22,7 +22,7 @@ categories: 设计模式
 ## 结构
 抽象表达式 (AbstractExpression)
 
-定义解释器接口，解释器的解释操作，主要包含interpret()方法。
+定义解释器接口，解释器的解释操作，主要包含interpret()方法，这个方法为抽象语法树中所有的节点所共有；。
 
 终结符表达式 (TermianExpression)
 
@@ -34,7 +34,7 @@ categories: 设计模式
 
 环境角色(Context)
 
-通常包含各个解释器需要的数据或公共的功能。
+通常包含各个解释器需要的数据或公共的功能等全局信息。
 
 客户端 (Client)
 

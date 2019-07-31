@@ -148,7 +148,7 @@ public class Test {
 ![](https://itmanmzt.github.io/styles/images/observer/001.jpg){:align="center"}<br><br>
 
 ## 小结
-这个模式是松偶合的。改变主题或观察者中的一方，另一方不会受到影像。<br>
+这个模式是松偶合的。改变主题或观察者中的一方，另一方不会受到影响。<br>
 JDK中也有自带的观察者模式。但是被观察者是一个类而不是接口，限制了它的复用能力。<br>
 在JavaBean和Swing中也可以看到观察者模式的影子。<br>
 <br>
