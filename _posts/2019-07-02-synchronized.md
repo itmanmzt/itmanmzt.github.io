@@ -238,9 +238,17 @@ public class BingFaTest implements Runnable{
 通过对比分析我们可以知道，类锁的作用范围是全局的，因为一个类的类对象只能有一个，但类的实例可以有多个。当我们需要对所有实例都进行同步时，需要选择类锁进行同步。
 
 ## synchronized的性质
-synchronized具有两个重要性质，可重入性和不可中断性。可重入性是指当某个线程获取到锁之后，其内部递归调用的方法可以重复获取到这把锁，直到完全把锁释放。不可中断性事指synchronized结束的方式只有两种：抛出异常或者正常运行结束。不存在有优先级高的线程强行中断或者其他线程可以因为等待时间太长而自行退出的情况。而这些是Lock锁所具备的特性。<br>
+synchronized具有四个重要性质，可见性、原子性、可重入性和不可中断性。<br>
+可见性：指当多个线程访问同一个变量时，一个线程修改了这个变量的值，其他线程能够立即看得到修改的值。<br>
+JMM关于synchronized的两条规定保证了可见性：1、线程解锁前，必须把共享变量的最新值刷新到主内存中；2、线程加锁时，将清空工作内存中共享变量的值，从而使用共享变量时需要从主内存中重新读取最新的值（注意：加锁和解锁需要是同一把锁）<br>
+
+原子性：即一个操作或者多个操作 要么全部执行并且执行的过程不会被任何因素打断，要么就都不执行。<br>
+
+可重入性是指当某个线程获取到锁之后，其内部递归调用的方法可以重复获取到这把锁，直到完全把锁释放。<br>
+不可中断性事指synchronized结束的方式只有两种：抛出异常或者正常运行结束。不存在有优先级高的线程强行中断或者其他线程可以因为等待时间太长而自行退出的情况。而这些是Lock锁所具备的特性。<br>
 可重入性的代码演示：<br>
 自身递归：
+
 ```
 public class BingFaTest implements Runnable{
     static BingFaTest bft1=new BingFaTest();
@@ -471,7 +479,7 @@ public class Thread2 implements Runnable {
 
 ## 深入探究synchronized的作用机理
 首先我们先来探究synchronized加锁和释放锁的机理，其原理时通过内置锁。在每个对象的对象头都会有一个记录对应对象锁的字段，可以通过对这个字段所表示的信号进行判断改对象锁的状态。而synchronized底层也有类似与Lock加锁释放锁的方法，Java为我们提供了monitor指令，里面通过monitorEnter指令进行加锁，通过monitorExit进行释放锁操作，我们可以通过对同步方法进行反编译来进行验证。<br>
-我们先编写一个同步方法类：
+我们先编写一个同步代码块类：
 ```
 public class FanBianYiTest {
     private Object object=new Object();
@@ -486,6 +494,20 @@ public class FanBianYiTest {
 ![](https://itmanmzt.github.io/styles/images/synchronized/014.jpg){:align="center"}<br><br>
 ![](https://itmanmzt.github.io/styles/images/synchronized/015.jpg){:align="center"}<br><br>
 通过观察反编译后的结果我们可以验证我们前面的解释。并且我们也可以知道一个monitorEnter可以对应多个monitorExit指令。<br><br>
+对于同步方法来说，它的实现机制和同步代码块有一些许不同的地方。<br><br>
+```
+public synchronized void method() {
+         System.out.println("Hello World!");
+}
+```
+![](https://itmanmzt.github.io/styles/images/synchronized/016.jpg){:align="center"}<br><br>
+从反编译的结果来看，方法的同步并没有通过指令monitorenter和monitorexit来完成（理论上其实也可以通过这两条指令来实现）。<br><br>
+相对于普通方法，其常量池中多了ACC_SYNCHRONIZED标示符。<br><br>
+JVM就是根据该标示符来实现方法的同步的：当方法被调用时，调用指令将会检查方法的 ACC_SYNCHRONIZED 访问标志是否被设置，如果设置了，执行线程将先获取monitor，获取成功之后才能执行方法体，方法执行完后再释放monitor。在方法执行期间，其他任何线程都无法再获得同一个monitor对象。 其实本质上没有区别，只是方法的同步是一种隐式的方式来实现，无需通过字节码来完成。
+<br><br>
+通过这两段描述，我们应该能很清楚的看出synchronized的实现原理，synchronized的语义底层是通过一个monitor的对象来完成。 <br><br>
+其实wait/notify等方法也依赖于monitor对象，这就是为什么只有在同步的块或者方法中才能调用wait/notify等方法，否则会抛出java.lang.IllegalMonitorStateException的异常的原因。<br><br>
+
 下面我们将解释synchronized的可重入性原理：这类似于计算机操作系统的PV操作和临界区，存在一个信号量，我们称之为加锁计数器,初始值为0，当某个对象获取该锁时，计数器加一，也就是说每当执行一次monitorEnter指令，计数器加一，而每当执行一次monitorExit指令，计数器减一。其他的线程会根据计数器的状态来判断锁是否已经被释放而决定自身线程的状态。<br><br>
 接下来我们再讲解一个synchronized可见性的原理：首先我们先来理解一下Java的内存模型，对于线程和锁对象来说，它们所用的内存是不一样的，锁对象是存储在主内存中的，而线程的信息是存储在局部内存中的，当一个线程获取锁之后，就会去主内存读取锁对象的信息并保存到自己的线程局部内存中，线程执行操作会改变内存中的信息，当要释放锁的时候，线程会将线程局部内存中的信息写到主内存中，供下一个获取锁对象的线程读取。
 
