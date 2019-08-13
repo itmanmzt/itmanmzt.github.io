@@ -1,7 +1,7 @@
 ---
 layout: post
 #标题配置
-title: 中断机制(Interrupt)
+title: Interrupt中断机制
 #时间配置
 date:   2019-08-11 10:16:00 +0800
 #大类配置
